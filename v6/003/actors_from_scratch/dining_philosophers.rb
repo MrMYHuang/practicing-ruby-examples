@@ -22,7 +22,7 @@ class Philosopher
 
   def think
     puts "#{@name} is thinking."
-    sleep(rand)
+    #sleep(rand)
 
     @waiter.async.request_to_eat(Actor.current)
   end
@@ -31,7 +31,7 @@ class Philosopher
     take_chopsticks
 
     puts "#{@name} is eating."
-    sleep(rand)
+    #sleep(rand)
 
     drop_chopsticks
 
@@ -41,13 +41,19 @@ class Philosopher
   end
 
   def take_chopsticks
+    puts "#{@name} try to take the left chopstick."
     @left_chopstick.take
+    puts "L #{@name} takes the left chopstick."
+    puts "#{@name} try to take the right chopstick."
     @right_chopstick.take
+    puts "R #{@name} takes the right chopstick."
   end
 
   def drop_chopsticks
     @left_chopstick.drop
+    puts "DL #{@name} drops the left chopstick."
     @right_chopstick.drop
+    puts "DR #{@name} drops the right chopstick."
   end
 end
 
@@ -59,7 +65,7 @@ class Waiter
   end
 
   def request_to_eat(philosopher)
-    binding.pry
+    #binding.pry
     return if @eating.include?(philosopher)
 
     @eating << philosopher
@@ -72,7 +78,7 @@ class Waiter
   end
 end
 
-names = %w{Heraclitus Aristotle Epictetus Schopenhauer Popper}
+names = %w{Heraclitus Aristotle}
 
 philosophers = names.map { |name| Philosopher.new(name) }
 
